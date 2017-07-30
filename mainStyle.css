@@ -1,0 +1,16 @@
+html{
+    background-color: lightpink;
+}
+
+#gameTitle{
+    text-align: center;
+    background-color: white;
+    padding: 20px;
+}
+
+#gameSection{
+    width: 700px;
+    height: 700px;
+    margin: auto;
+    background-color: hotpink;
+}
