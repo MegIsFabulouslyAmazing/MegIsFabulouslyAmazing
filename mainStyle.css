@@ -2,15 +2,37 @@ html{
     background-color: lightpink;
 }
 
+body{
+    margin:0;
+    padding: 0; 
+}
+
 #gameTitle{
     text-align: center;
     background-color: white;
     padding: 20px;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    margin: 0px;
 }
 
 #gameSection{
     width: 700px;
-    height: 700px;
     margin: auto;
+    margin-top: 100px;
+    padding: 20px;
     background-color: hotpink;
+}
+
+#gameSection img{
+    width: 400px;
+    margin: auto;
+    display: block;
+}
+
+#gameSection p{
+    text-align: center;
+    font-size: 22px;
 }
