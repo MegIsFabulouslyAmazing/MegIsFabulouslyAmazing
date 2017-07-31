@@ -1,3 +1,6 @@
+*{
+    box-sizing: border-box;
+}
 html{
     background-color: lightpink;
 }
@@ -7,7 +10,7 @@ body{
     padding: 0; 
 }
 
-#gameTitle{
+#pageTitle{
     text-align: center;
     background-color: white;
     padding: 20px;
@@ -18,21 +21,47 @@ body{
     margin: 0px;
 }
 
-#gameSection{
-    width: 700px;
-    margin: auto;
-    margin-top: 100px;
-    padding: 20px;
+nav{
+    margin-top: 77px;
+    background-color: white;
+    float: right;
+    width: 100%;
+    border-top: 2px solid black;
+}
+
+nav ul{
+    float: right;
+}
+
+nav ul li{
+    list-style: none;
+    display: inline;
+    margin: 0px;
+}
+
+nav ul li a{
+    text-decoration: none;
+    padding: 16px;
+    margin: 0px;
+    color:black;
+}
+
+nav ul li a:hover{
     background-color: hotpink;
 }
 
-#gameSection img{
-    width: 400px;
+#mainSection{
+    width: 80%;
+    min-width: 500px;
     margin: auto;
-    display: block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: hotpink;
+    float: left;
 }
 
-#gameSection p{
-    text-align: center;
-    font-size: 22px;
+aside{
+    float: left;
+    width: 10%;;
 }

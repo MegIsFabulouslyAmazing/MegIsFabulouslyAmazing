@@ -1,0 +1,10 @@
+#mainSection img{
+    width: 400px;
+    margin: auto;
+    display: block;
+}
+
+#mainSection p{
+    text-align: center;
+    font-size: 22px;
+}
