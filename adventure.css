@@ -1,0 +1,15 @@
+h1{
+    text-align: center;
+}
+
+#gameTextDiv{
+    background-color: white;
+    max-height: 300px;
+    overflow: scroll;
+    border: black 5px solid;
+}
+
+#userInputBox{
+    margin-top: 10px;
+    width: 100%;
+}

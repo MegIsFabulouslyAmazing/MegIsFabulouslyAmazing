@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Meg is Fabulously Amazing</title>
+        <link rel="stylesheet" type="text/css" href="mainStyle.css">
+        <link rel="stylesheet" type="text/css" href="adventure.css">
+        <script type="text/jscript" src="adventure.js"></script>
+    </head>
+    <body onload="startGame()">
+        <h1 id="pageTitle">Meg is Fabulously Amazing</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gossip.html">Gossip</a></li>
+                <li><a href="adorable.html">Adorable</a></li>
+                <li><a href="compliments.html">Compliments</a></li>
+                <li><a href="precious.html">Precious</a></li>
+            </ul>
+        </nav>
+        <aside>&nbsp;</aside>
+        <section id=mainSection>
+            <h1>Meg Saves the World</h1>
+            <div id="gameTextDiv">
+                <p id="gameText">It was a dark and stormy night. Here are the controls.</p>
+            </div>
+            <input type="text" name="userInputBox" id="userInputBox" placeholder="Type commands here" onkeypress="keys(event)">
+        </section>
+        <aside>&nbsp;</aside>
+    </body>
+</html>
