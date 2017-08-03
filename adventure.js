@@ -7,7 +7,7 @@ var roomText = ["Welcome to the PO! This is where we make the magic happens. Som
 "The Claflin boulders are firm and strong. They are green baby, ahhh!", 
 "Children are fleeing the quad. Screaming as they attempt to escape the run. There appears to be four water spouts coming toward the quad from the lake.", 
 "The Comets killed the dinosaurs, so be careful here! Your living group is sitting out on the hall screaming and crying. The are in a big huddle in one corner. Across the hall, there is a glowing orb that is humming ominously.", 
-"The Deans have freezie pops! There are no Deans here though, they are out trying to make the crying children cry less. This isn't the CO.", 
+"There are no Deans here, they are out trying to make the crying children cry less. This isn't the CO.", 
 "There's a staff member playing guitar in the archway. They seem completely unaware of the weather.", 
 "The storm has ripped the covering off of the sun dial, only it doesn't seem to be a sun dial anymore. There is a perfect place to put a spherical object of some sort.", 
 "Folk jam club is meeting right now. The music seems to be soothing the children. Several staff members are looking anxiously out the windows.", 
