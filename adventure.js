@@ -5,25 +5,25 @@ var mapLocation = ["Programming", "Claflin", "Quad West", "Tower West", "DO", "A
 
 var roomText = ["Welcome to the PO! This is where we make the magic happens. Someone left a magic wand on the desk.", 
 "The Claflin boulders are firm and strong. They are green baby, ahhh!", 
-"There are kids playing frisbee.", 
+"Children are fleeing the quad. Screaming as they attempt to escape the run. There appears to be four water spouts coming toward the quad from the lake.", 
 "The Comets killed the dinosaurs, so be careful here! Your living group is sitting out on the hall screaming and crying. The are in a big huddle in one corner. Across the hall, there is a glowing orb that is humming ominously.", 
-"The Deans have freezie pops!", 
-"There's a staff member playing guitar in the archway.", 
-"There are kids playing wallball", 
-"Folk jam club is meeting right now", 
-"The Zephyrs might blow you away!", 
-"Come here to change your classes", 
+"The Deans have freezie pops! There are no Deans here though, they are out trying to make the crying children cry less. This isn't the CO.", 
+"There's a staff member playing guitar in the archway. They seem completely unaware of the weather.", 
+"The storm has ripped the covering off of the sun dial, only it doesn't seem to be a sun dial anymore. There is a perfect place to put a spherical object of some sort.", 
+"Folk jam club is meeting right now. The music seems to be soothing the children. Several staff members are looking anxiously out the windows.", 
+"The Zephyrs might blow you away! Although really with this storm, you might actually get blown away. Be careful out there!", 
+"Come here to change your classes. This isn't the DO.", 
 "You can hear a staff member playing guitar in the archway.", 
-"This is where community meeting happens. There is no one here right now.", 
+"This is where community meeting happens. There is no one here right now. They are all cowering in fear back on the quad.", 
 "Wow, this place is really far away.", 
 "Look, a Phoenix!", 
-"There's a lot of art in here. Adam and Kai are busy helping kids get creative in here. In one corner is a really sparkly cape. Someone went a little nuts with the glitter...", 
+"There's a lot of art in here. Adam and Kai are busy helping kids get creative in here. In one corner is a really sparkly cape. Someone went a little nuts with the glitter... I thought Devyn banned that stuff.", 
 "Board games galore! If only you had time to play games.", 
 "There are classes here.", 
 "This building is really weird. None of the corners are 90 degrees! Out of the corner of your eye, you see a hat on the ground. It's weird though, when you try to look straight at it, nothing seems to be there.", 
-"Classes happen here", 
-"Classes happen here", 
-"Wow! Where are you? It's almost like you've been magically transported to an entirely different campus! As you step into the dark hallway, the lights begin to flicker. From around a corner appears SHARON THE TICK, OVERLORD OF THE BLOODSUCKING DISEASE RIDDEN ARACHNID MONSTERS! Quick! Do something to save yourself!"]
+"The view is really great from the top of this tower. What are you doing climbing all these stairs though?? You're supposed to be on a mission! Stop getting distracted by a pretty view!", 
+"Classes happen here.", 
+"Wow! Where are you? It's almost like you've been magically transported to an entirely different campus! As you step into the dark hallway, the lights begin to flicker. From around a corner appears EVIL KAREN THE TICK, OVERLORD OF THE BLOODSUCKING DISEASE RIDDEN ARACHNID MONSTERS! Quick! Do something to save yourself!"]
 
 var helpText1 = "In order to play this game there are a few things you should know! Type commands into the box below the text area to play. Movement commands work with capitalization, no capitalization, and initials. For example, to move, you can type 'north', 'North', or 'n'. Other commands to move are 'south', 'east', and 'west'."
 
@@ -388,27 +388,35 @@ function changeRoom(){
                 break;
         }
     }
+    else{
+        addNewText("You can't go that way!");
+    }
 }
 
 function take(){
     if (room == 3 && userInput.includes("orb") && !itemTaken[1]){
-            addNewText("You can't seem to pick it up! You might need to use something magical to help you.");
-            itemTaken[1] = 1;
+        addNewText("You can't seem to pick it up! You might need to use something magical to help you.");
+        itemTaken[1] = 1;
+        roomText[3] = "The Comets killed the dinosaurs, so be careful here! Your living group is sitting out on the hall screaming and crying. The are in a big huddle in one corner.";
+        
     }
     else if (room == 14 && userInput.includes("cape") && !itemTaken[3]){
         inventory.push("cape");
         addNewText("You have picked up the cape!");
         itemTaken[3] = 1;
+        roomText[14] = "There's a lot of art in here. Adam and Kai are busy helping kids get creative in here. Someone went a little nuts with the glitter... I thought Devyn banned that stuff.";
     }
     else if (room == 0 && userInput.includes("wand") && !itemTaken[0]){
         inventory.push("wand");
         addNewText("You have picked up the wand!");
         itemTaken[0] = 1;
+        roomText[0] = "Welcome to the PO! This is where we make the magic happens.";
     }
     else if (room == 17 && userInput.includes("hat") && !itemTaken[2]){
         inventory.push("hat");
         addNewText("You have picked up the hat!");
         itemTaken[2] = 1;
+        roomText[17] = "This building is really weird. None of the corners are 90 degrees!";
     }
     else{
         addNewText("Sorry, that's not possible. Make sure you spelled the item exactly as it appears in the text!");
@@ -418,45 +426,54 @@ function take(){
 function use(){
     console.log("use");
     var itemIndex
-    if (room == 6 && userInput.includes("orb")){
+    if (room == 6 && userInput.includes("orb") && inventory.indexOf("orb") != -1){
             itemIndex = inventory.indexOf("orb");
             inventory.splice(itemIndex, itemIndex + 1);
-            addNewText("You have used the orb! Nothing seems to be happening though...");
+            addNewText("You have placed the orb on the stand! Nothing seems to be happening though...");
             console.log(inventory);
     }
-    else if (room == 6 && userInput.includes("wand")){
+    else if (room == 6 && userInput.includes("wand") && inventory.indexOf("wand") != -1){
         if (hatUsed && capeUsed){
             addNewText("Something is happening!!!!!!");
             console.log(inventory);
             room = 20;
-            look();
         }
         else{
             addNewText("Hmmm... That didn't quite work. You must be missing something magical.");
         }
     }
-    else if (room == 3 && userInput.includes("wand")){
+    else if (room == 3 && userInput.includes("wand") && inventory.indexOf("wand") != -1){
             addNewText("You have used the wand to pick up the orb!");
             inventory.push("orb");
             console.log(inventory);
     }
-    else if (room == 20 && userInput.includes("wand")){
-            addNewText("You use your magical wand to smother SHARON THE TICK, OVERLORD OF THE BLOODSUCKING DISEASE RIDDEN ARACHNID MONSTERS! with bug spray. As she starts to cough in a haze of bug spray, your Secret Staff Buddy Meghan Jimenez smashes through one of the walls riding a dragon named Carl. Carl breathes flames at SHARON THE TICK, OVERLORD OF THE BLOODSUCKING DISEASE RIDDEN ARACHNID MONSTERS! who quickly becomes SHARON THE BARBECUED TICK, OVERLORD OF THE BLOODSUCKING DISEASE RIDDEN ARACHNID MONSTERS! As soon as Sharon falls to the ground repenting for her sins against Cruise Night, the sky begins to clear. You give Meghan a high-five and climb aboard Carl to fly off into the beautiful, cloudless sky to cruise night.");
+    else if (room == 20 && userInput.includes("wand") && inventory.indexOf("wand") != -1){
+            addNewText("You use your magical wand to smother EVIL KAREN THE TICK, OVERLORD OF THE BLOODSUCKING DISEASE RIDDEN ARACHNID MONSTERS! with bug spray. As she starts to cough in a haze of bug spray, your Secret Staff Buddy Meghan Jimenez smashes through one of the walls riding a dragon named Carl. Carl breathes flames at EVIL KAREN THE TICK, OVERLORD OF THE BLOODSUCKING DISEASE RIDDEN ARACHNID MONSTERS! who quickly becomes EVIL KAREN THE BARBECUED TICK, OVERLORD OF THE BLOODSUCKING DISEASE RIDDEN ARACHNID MONSTERS! As soon as EVIL KAREN THE BARBECUED TICK, OVERLORD OF THE BLOODSUCKING DISEASE RIDDEN ARACHNID MONSTERS falls to the ground repenting for her sins against Cruise Night, the sky begins to clear. You give Meghan a high-five and climb aboard Carl to fly off into the beautiful, cloudless sky to cruise night. Congratulations! You have won!");
     }
     else if (userInput.includes("cape")){
-        itemIndex = inventory.indexOf("cape");
-        inventory.splice(itemIndex, itemIndex + 1);
-        addNewText("You are now wearing the cape!");
-        capeUsed = 1;
-        console.log(inventory);
+        if (inventory.indexOf("cape") != -1){
+            itemIndex = inventory.indexOf("cape");
+            inventory.splice(itemIndex, itemIndex + 1);
+            addNewText("You are now wearing the cape!");
+            capeUsed = 1;
+            console.log(inventory);
+        }
+        else if (hatUsed){
+            addNewText("You are already wearing the cape!");
+        }
     }
-    else if (userInput.includes("hat")){
-        console.log("hat");
-        itemIndex = inventory.indexOf("hat");
-        inventory.splice(itemIndex, itemIndex + 1);
-        addNewText("You are now wearing the hat!");
-        hatUsed = 1;
-        console.log(inventory);
+    else if (userInput.includes("hat") && inventory.includes("hat")){
+        if (inventory.indexOf("hat") != -1){
+            console.log("hat");
+            itemIndex = inventory.indexOf("hat");
+            inventory.splice(itemIndex, itemIndex + 1);
+            addNewText("You are now wearing the hat!");
+            hatUsed = 1;
+            console.log(inventory);
+        }
+        else if(capeUsed){
+            addNewText("You are already wearing the cape!");
+        }
     }
     else{
         addNewText("Sorry, that's not possible. Make sure you spelled the item exactly as it appears in the text!");
