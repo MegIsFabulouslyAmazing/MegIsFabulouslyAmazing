@@ -22,7 +22,7 @@ var roomText = ["Welcome to the PO! This is where we make the magic happens. Som
 "There are classes here.", 
 "This building is really weird. None of the corners are 90 degrees! Out of the corner of your eye, you see a hat on the ground. It's weird though, when you try to look straight at it, nothing seems to be there.", 
 "The view is really great from the top of this tower. What are you doing climbing all these stairs though?? You're supposed to be on a mission! Stop getting distracted by a pretty view!", 
-"Classes happen here.", 
+"A lot of EXPLO classes are held here. In a back corner of one of the classrooms, you see an old, folded up map.", 
 "Wow! Where are you? It's almost like you've been magically transported to an entirely different campus! As you step into the dark hallway, the lights begin to flicker. From around a corner appears EVIL KAREN THE TICK, OVERLORD OF THE BLOODSUCKING DISEASE RIDDEN ARACHNID MONSTERS! Quick! Do something to save yourself!"]
 
 var helpText1 = "In order to play this game there are a few things you should know! Type commands into the box below the text area and then press enter to play. Movement commands work with capitalization, no capitalization, and initials. For example, to move, you can type 'north', 'North', or 'n'. Other commands to move are 'south', 'east', and 'west'."
@@ -33,9 +33,10 @@ var inventory = [];
 
 var roomChecked = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
-var itemTaken = [0, 0, 0, 0];
+var itemTaken = [0, 0, 0, 0, 0];
 var hatUsed = 0;
 var capeUsed = 0;
+var mapUsed = 0;
 
 function keys(event){
     //record which key was pressed
@@ -418,6 +419,12 @@ function take(){
         itemTaken[2] = 1;
         roomText[17] = "This building is really weird. None of the corners are 90 degrees!";
     }
+    else if (room == 19 && userInput.includes("map") && !itemTaken[4]){
+        inventory.push("map");
+        addNewText("You have picked up the map!");
+        itemTaken[4] = 1;
+        roomText[19] = "A lot of EXPLO classes are held here.";
+    }
     else{
         addNewText("Sorry, that's not possible. Make sure you spelled the item exactly as it appears in the text!");
     }
@@ -462,7 +469,7 @@ function use(){
             addNewText("You are already wearing the cape!");
         }
     }
-    else if (userInput.includes("hat") && inventory.includes("hat")){
+    else if (userInput.includes("hat")){
         if (inventory.indexOf("hat") != -1){
             console.log("hat");
             itemIndex = inventory.indexOf("hat");
@@ -473,6 +480,21 @@ function use(){
         }
         else if(capeUsed){
             addNewText("You are already wearing the cape!");
+        }
+    }
+    else if (userInput.includes("map")){
+        if (inventory.indexOf("map") != -1){
+            console.log("map");
+            itemIndex = inventory.indexOf("map");
+            inventory.splice(itemIndex, itemIndex + 1);
+            addNewText("You should see the map below the input box!");
+            var element = document.getElementById("MIFAmap");
+            element.style.display = "block";
+            mapUsed = 1;
+            console.log(inventory);
+        }
+        else if(mapUsed){
+            addNewText("You are already using the map!");
         }
     }
     else{

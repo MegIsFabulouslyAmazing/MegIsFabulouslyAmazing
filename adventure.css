@@ -14,3 +14,10 @@ h1{
     margin-top: 10px;
     width: 100%;
 }
+
+#MIFAmap{
+    display: none;
+    width: 60%;
+    padding: 20px;
+    margin: auto;
+}
