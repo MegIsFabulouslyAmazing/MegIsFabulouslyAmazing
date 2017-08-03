@@ -25,7 +25,7 @@ var roomText = ["Welcome to the PO! This is where we make the magic happens. Som
 "Classes happen here.", 
 "Wow! Where are you? It's almost like you've been magically transported to an entirely different campus! As you step into the dark hallway, the lights begin to flicker. From around a corner appears EVIL KAREN THE TICK, OVERLORD OF THE BLOODSUCKING DISEASE RIDDEN ARACHNID MONSTERS! Quick! Do something to save yourself!"]
 
-var helpText1 = "In order to play this game there are a few things you should know! Type commands into the box below the text area to play. Movement commands work with capitalization, no capitalization, and initials. For example, to move, you can type 'north', 'North', or 'n'. Other commands to move are 'south', 'east', and 'west'."
+var helpText1 = "In order to play this game there are a few things you should know! Type commands into the box below the text area and then press enter to play. Movement commands work with capitalization, no capitalization, and initials. For example, to move, you can type 'north', 'North', or 'n'. Other commands to move are 'south', 'east', and 'west'."
 
 var helpText2 = "You can also type 'look' to see the detailed description of a room, 'take' followed by the name of an item in a room, which should be typed exactly as it is in the description of the room, to pick up an object, or 'use' followed by the name of an item you have picked up to use an item. You can type 'inventory' to see what you currently have in your backpack."
 
