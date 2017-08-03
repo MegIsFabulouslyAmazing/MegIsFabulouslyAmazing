@@ -3,8 +3,9 @@ var command = "";
 var room = 0;
 var mapLocation = ["Programming", "Claflin", "Quad West", "Tower West", "DO", "Archway West", "Quad East", "Great Room", "Tower East", "CO", "Archway East", "Alumni", "KSC", "Severance", "Art Room", "Board Game Room", "Founders", "Lulu Wang", "Green", "Pendleton", "Dana Hall"];
 
-var roomText = ["Welcome to the PO! This is where we make the magic happens.", 
-"The Claflin boulders are firm and strong. They are green baby, ahhh!", "There are kids playing frisbee.", 
+var roomText = ["Welcome to the PO! This is where we make the magic happens. Someone left a magic wand on the desk.", 
+"The Claflin boulders are firm and strong. They are green baby, ahhh!", 
+"There are kids playing frisbee.", 
 "The Comets killed the dinosaurs, so be careful here! Your living group is sitting out on the hall screaming and crying. The are in a big huddle in one corner. Across the hall, there is a glowing orb that is humming ominously.", 
 "The Deans have freezie pops!", 
 "There's a staff member playing guitar in the archway.", 
@@ -16,19 +17,23 @@ var roomText = ["Welcome to the PO! This is where we make the magic happens.",
 "This is where community meeting happens. There is no one here right now.", 
 "Wow, this place is really far away.", 
 "Look, a Phoenix!", 
-"There's a lot of art in here. Adam and Kai are busy helping kids get creative in here.", 
+"There's a lot of art in here. Adam and Kai are busy helping kids get creative in here. In one corner is a really sparkly cape. Someone went a little nuts with the glitter...", 
 "Board games galore! If only you had time to play games.", 
 "There are classes here.", 
-"This building is really weird. None of the corners are 90 degrees!", "Classes happen here", 
+"This building is really weird. None of the corners are 90 degrees! Out of the corner of your eye, you see a hat on the ground. It's weird though, when you try to look straight at it, nothing seems to be there.", 
 "Classes happen here", 
-"Wow! Where are you? It's almost like you've been magically transported to an entirely different campus!"]
+"Classes happen here", 
+"Wow! Where are you? It's almost like you've been magically transported to an entirely different campus! As you step into the dark hallway, the lights begin to flicker. From around a corner appears SHARON THE TICK, OVERLORD OF THE BLOODSUCKING DISEASE RIDDEN ARACHNID MONSTERS! Quick! Do something to save yourself!"]
 
-var helpText = "In order to play this game there are a few things you should know! Type commands into the box below the text area to play. All commands work with capitalization, no capitalization, and initials. For example, to move, you can type 'north', 'North', or 'n'. Other commands to move are 'south', 'east', and 'west'. You can also type 'look' to see the detailed description of a room, 'take' followed by the name of an item in a room, which should be typed exactly as it is in the description of the room, to pick up an object, or 'use' followed by the name of an item you have picked up to use an item. You can type 'inventory' to see what you currently have in your backpack."
+var helpText1 = "In order to play this game there are a few things you should know! Type commands into the box below the text area to play. Movement commands work with capitalization, no capitalization, and initials. For example, to move, you can type 'north', 'North', or 'n'. Other commands to move are 'south', 'east', and 'west'."
+
+var helpText2 = "You can also type 'look' to see the detailed description of a room, 'take' followed by the name of an item in a room, which should be typed exactly as it is in the description of the room, to pick up an object, or 'use' followed by the name of an item you have picked up to use an item. You can type 'inventory' to see what you currently have in your backpack."
 
 var inventory = [];
 
 var roomChecked = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
+var itemTaken = [0, 0, 0, 0];
 var hatUsed = 0;
 var capeUsed = 0;
 
@@ -78,10 +83,10 @@ function getCommand(){
     else if (userInput == "inventory" || userInput == "Inventory" || userInput == "i"){
         command = "i";
     }
-    else if (userInput.includes("take") || userInput.includes("Take") || userInput.includes("t")){
+    else if (userInput.includes("take") || userInput.includes("Take")){
         command = "t";
     }
-    else if (userInput.includes("use") || userInput.includes("Use") || userInput.includes("u")){
+    else if (userInput.includes("use") || userInput.includes("Use")){
         command = "u";
     }
     else{
@@ -108,7 +113,8 @@ function changeRoom(){
         use();
     }
     else if (command == 'h'){
-        addNewText(helpText);
+        addNewText(helpText1);
+        addNewText(helpText2);
     }
     else if (command == 'l'){
         addNewText(roomText[room]);
@@ -385,22 +391,24 @@ function changeRoom(){
 }
 
 function take(){
-    if (room == 3){
-        if (userInput.includes("orb")){
+    if (room == 3 && userInput.includes("orb") && !itemTaken[1]){
             addNewText("You can't seem to pick it up! You might need to use something magical to help you.");
-        }
+            itemTaken[1] = 1;
     }
-    else if (room == 14 && userInput.includes("cape")){
-            inventory.push("cape");
-            addNewText("You have picked up the cape!");
+    else if (room == 14 && userInput.includes("cape") && !itemTaken[3]){
+        inventory.push("cape");
+        addNewText("You have picked up the cape!");
+        itemTaken[3] = 1;
     }
-    else if (room == 0 && userInput.includes("wand")){
-            inventory.push("wand");
-            addNewText("You have picked up the wand!");
+    else if (room == 0 && userInput.includes("wand") && !itemTaken[0]){
+        inventory.push("wand");
+        addNewText("You have picked up the wand!");
+        itemTaken[0] = 1;
     }
-    else if (room == 17 && userInput.includes("hat")){
-            inventory.push("hat");
-            addNewText("You have picked up the hat!");
+    else if (room == 17 && userInput.includes("hat") && !itemTaken[2]){
+        inventory.push("hat");
+        addNewText("You have picked up the hat!");
+        itemTaken[2] = 1;
     }
     else{
         addNewText("Sorry, that's not possible. Make sure you spelled the item exactly as it appears in the text!");
@@ -408,6 +416,7 @@ function take(){
 }
 
 function use(){
+    console.log("use");
     var itemIndex
     if (room == 6 && userInput.includes("orb")){
             itemIndex = inventory.indexOf("orb");
@@ -417,8 +426,10 @@ function use(){
     }
     else if (room == 6 && userInput.includes("wand")){
         if (hatUsed && capeUsed){
-                addNewText("Something is happening!!!!!!");
-                console.log(inventory);
+            addNewText("Something is happening!!!!!!");
+            console.log(inventory);
+            room = 20;
+            look();
         }
         else{
             addNewText("Hmmm... That didn't quite work. You must be missing something magical.");
@@ -429,16 +440,22 @@ function use(){
             inventory.push("orb");
             console.log(inventory);
     }
+    else if (room == 20 && userInput.includes("wand")){
+            addNewText("You use your magical wand to smother SHARON THE TICK, OVERLORD OF THE BLOODSUCKING DISEASE RIDDEN ARACHNID MONSTERS! with bug spray. As she starts to cough in a haze of bug spray, your Secret Staff Buddy Meghan Jimenez smashes through one of the walls riding a dragon named Carl. Carl breathes flames at SHARON THE TICK, OVERLORD OF THE BLOODSUCKING DISEASE RIDDEN ARACHNID MONSTERS! who quickly becomes SHARON THE BARBECUED TICK, OVERLORD OF THE BLOODSUCKING DISEASE RIDDEN ARACHNID MONSTERS! As soon as Sharon falls to the ground repenting for her sins against Cruise Night, the sky begins to clear. You give Meghan a high-five and climb aboard Carl to fly off into the beautiful, cloudless sky to cruise night.");
+    }
     else if (userInput.includes("cape")){
         itemIndex = inventory.indexOf("cape");
         inventory.splice(itemIndex, itemIndex + 1);
         addNewText("You are now wearing the cape!");
+        capeUsed = 1;
         console.log(inventory);
     }
     else if (userInput.includes("hat")){
+        console.log("hat");
         itemIndex = inventory.indexOf("hat");
         inventory.splice(itemIndex, itemIndex + 1);
         addNewText("You are now wearing the hat!");
+        hatUsed = 1;
         console.log(inventory);
     }
     else{
