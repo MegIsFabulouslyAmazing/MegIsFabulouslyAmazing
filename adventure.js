@@ -470,7 +470,7 @@ function use(){
             capeUsed = 1;
             console.log(inventory);
         }
-        else if (hatUsed){
+        else if (capeUsed){
             addNewText("You are already wearing the cape!");
         }
     }
