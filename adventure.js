@@ -441,7 +441,7 @@ function use(){
     if (room == 6 && userInput.includes("orb") && inventory.indexOf("orb") != -1){
             itemIndex = inventory.indexOf("orb");
             inventory.splice(itemIndex, itemIndex + 1);
-            addNewText("You have placed the orb on the stand! Nothing seems to be happening though...");
+            addNewText("You have placed the orb on the stand! Nothing seems to be happening though... You might need to do some magic.");
             console.log(inventory);
     }
     else if (room == 6 && userInput.includes("wand") && inventory.indexOf("wand") != -1){
